@@ -18,14 +18,14 @@ dotenv.config();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
-app.use(cors());
+const corsOptions = {origin:"https://cinemaze-movie-booking-app.vercel.app"}
+app.use(cors(corsOptions));
 app.use('/user', userRouter)
 app.use('/admin', adminRouter)
 app.use('/movie', movieRouter)
 app.use('/booking',bookingRouter)
 app.use('/email',emailRouter)
 
-//const corsOptions = {origin:"http://localhost:3000"}
 
 // Connect to MongoDB database using Mongoose.
 mongoose.connect(`mongodb+srv://nikhilbabu80942:${process.env.MONGO_PWD}@cluster0.hbp6xss.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`)
