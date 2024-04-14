@@ -1,7 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from 'dotenv';
-import path from 'path'
 import cors from 'cors'
 import razorpay from 'razorpay'
 import crypto from 'crypto'
@@ -10,16 +9,12 @@ import { adminRouter } from "./routes/admin.js";
 import { movieRouter } from "./routes/movie.js";
 import { bookingRouter } from "./routes/booking.js";
 import { emailRouter } from "./routes/email.js";
-import { fileURLToPath } from 'url';
 
 const app = express()
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-app.use(express.static(path.join(__dirname,"client", "build")))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
 
@@ -37,9 +32,6 @@ mongoose.connect(`mongodb+srv://nikhilbabu80942:${process.env.MONGO_PWD}@cluster
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.error(err))
 
-    app.get("/",(req,res)=>{
-        res.sendFile(path.join(__dirname,"client", "build", "index.html"))
-    })
 
     const instance = new  razorpay({
         key_id : process.env.RAZORPAY_KEY,
