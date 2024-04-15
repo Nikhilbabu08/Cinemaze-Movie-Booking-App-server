@@ -120,7 +120,7 @@ export const toggleDisableMovie = async (req, res, next) => {
       movie.enabled = !movie.enabled;
       await movie.save();
   
-      res.status(200).json({ message: 'Movie status toggled successfully', enabled: movie.enabled });
+      res.status(200).json({ message: 'Movie status toggled successfully', enabled: movie.enabled,movie });
     } catch (error) {
       console.error('Error toggling movie status:', error);
       res.status(500).json({ message: 'Internal server error' });
